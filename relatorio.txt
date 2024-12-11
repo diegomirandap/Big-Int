@@ -1,0 +1,129 @@
+Diego Miranda 2210996 3WA
+Felipe Cancella 2210487 3WA
+
+Ao final do projeto todas as funçoes de manipulacao do "formato" BigInt estao rodando corretamente.
+
+Os casos de teste foram pensado da seguinte maneira.
+Buscamos experimentar para cada funcao: 
+  Um caso exclusivo do formato BigInt, com numeros maiores do que o maior signed long possivel (9223372036854775807).
+  Um caso de operacoes resultando em valores negativos.
+  Um caso de operacoes resultando em valores positivos.
+  Um caso de operacoes resultando em um valor nulo (zero).
+
+Essa foi o formato genérico que assumimos, porém para cada função procuramos adaptar esta fórmula de acordo com o que julgamos relevante à sua funcionalidade proposta. (Ex: diferentes comportamentos no shift aritimético à esquerda)
+
+Com isso, acreditamos que todas os tipos de resultados foram aboradados com o mínimo de casos de testes possíveis.
+
+A função de teste resulta em uma mensagem informando o numero de ações que falharam (Total de falhas X de 8), além de uma mensagem personalizada para alguma funcao que nao bata com o gabarito (Erro em XXXXX no teste Y).
+
+  
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+Diego Miranda - 2210996
+Felipe Cancella - 2210487
+23.0 - INF1018 e INF1040 - 3WA - Prof.: Raul Renteria e Flávio Bevilacqua
+ Modelo de Arquitetura de Módulos:  
+TDD:
+Os casos de teste para experimentar cada função foram no seguinte formato: 
+*   Um caso exclusivo do formato BigInt, (números maiores do que o maior signed long possível (9223372036854775807)).
+*   Um caso de operações resultando em valores negativos.
+*   Um caso de operações resultando em valores positivos.
+*   Um caso de operações resultando em um valor nulo (zero).
+
+Esse foi o formato genérico que assumimos, porém para cada função procuramos adaptar esta fórmula de acordo com o que julgamos relevante à sua funcionalidade proposta.
+
+
+void big_val(BigInt res, long val);
+Essa função declara o valor de res (BigInt) como o valor de val (long).
+Para testar os casos mais propícios a erros declaramos o res como sendo um valor:
+Positivo (1)
+Negativo (-2)
+Nulo (0)
+Maior Long (9223372036854775807)
+
+Com isso, os parâmetros usados foram valores positivos, negativos ou nulos, além também de um valor que representa o maior valor de um signed long. 
+void big_comp2(BigInt res, BigInt a);
+Essa função guarda em res o negativo de a, calculado a partir do método complemento a 2.
+Para testar ela declaramos a como:
+Positivo (1)
+Negativo (-2)
+Nulo(0)
+Menor/Maior long (-9223372036854775807)
+
+Com isso, os parâmetros usados foram valores positivos, negativos ou nulos, além também de um valor que representa o maior valor que um signed long armazena.
+
+
+void big_sum(BigInt res, BigInt a, BigInt b);
+Essa função guarda em res o resultado da soma de a e b.
+Para testar fizemos a soma de valores:
+Positivos (1 + 1)
+Negativo e Positivo (-2 + 1)
+Negativo e Negativo (-2 + -2)
+Positivo maior que um long (9223372036854775807 + 1) 
+obs: 9223372036854775807 + 1 = valor de tamanho maior que signed long
+
+Com isso, os parâmetros usados foram valores positivos, negativos ou nulos, além também de um valor de tamanho exclusivo de BigInt.
+
+
+void big_sub(BigInt res, BigInt a, BigInt b);
+Essa função guarda em res o resultado da subtração de a e b.
+Para testar fazemos a subtração de valores:
+Positivos (1 - 1)
+Negativo e Positivo (-2 - 1)
+Negativo e Negativo (-2 - (-2))
+Positivos e Negativo (9223372036854775808 - 1)
+
+Com isso, os parâmetros usados foram valores positivos, negativos ou nulos, além também de um valor de tamanho exclusivo de BigInt.
+
+
+void big_mul(BigInt res, BigInt a, BigInt b);
+Essa função guarda em res o resultado da multiplicação de a por b.
+Para testar fizemos a multiplicação de valores:
+Positivos (4 * 9223372036854775808)
+Negativo e Positivo (-2 * 9223372036854775808)
+Negativo e Negativo (-2 * -2)
+Negativo e Nulo (-2 * 0)
+
+Com isso, os parâmetros usados foram valores positivos, negativos ou nulos, além também de valores de tamanho exclusivo de BigInt.
+
+
+void big_shl(BigInt res, BigInt a, int n);
+Esta é uma função que irá fazer o shift lógico para a esquerda, em que os bits movidos são substituídos por 0. 
+Com isso, usamos os seguintes casos de teste: 
+Um valor positivo em 11 casas
+Um valor negativo em 1 casa
+
+Com isso, os fatores relevantes ao teste foram valores que são positivos e negativos, além do tamanho do shift, para termos a garantia que a informação é passada corretamente de um byte para o outro.
+
+
+void big_shr(BigInt res, BigInt a, int n);
+Esta é uma função que irá fazer o shift lógico para a direita, em que o bit mais significativo não é mantido, sendo substituído por 0. 
+Com isso, usamos os seguintes casos de teste: 
+Um valor positivo em 5 casas
+Um valor negativo em 10 casas
+
+Com isso, os fatores relevantes ao teste foram valores que são positivos e negativos, além do tamanho do shift, para termos a garantia que a informação é passada corretamente de um byte para o outro.
+
+
+void big_sar(BigInt res, BigInt a, int n);
+Esta é uma função que irá fazer o shift aritmético para a direita, em que o bit mais significativo é mantido. 
+Com isso, usamos os seguintes casos de teste: 
+Um valor positivo em 10 casas
+Um valor negativo em 5 casas
+
+Com isso, os fatores relevantes ao teste foram valores que são positivos e negativos para assegurar a manutenção do bit significativo, além do tamanho do shift, para termos a garantia que a informação é passada corretamente de um byte para o outro.
+
+
+Com isso, acreditamos que todos os tipos de resultados foram abordados com o mínimo de casos de testes possíveis.
+
+O teste resulta em uma mensagem informando o número de ações que falharam (Total de falhas X de 8), além de uma mensagem personalizada para alguma função que não bata com o gabarito (Erro em XXXXX no teste Y).
